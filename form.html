@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Contact </title>
+   <script src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js" defer></script>
+</head>
+<body>
+   <style>
+      	textarea {
+				resize: none;
+			}
+			.textarea {
+				background: yellow;
+			}
+   </style>
+   <form action="/" method="POST" x-data="contactForm()" @submit.prevent="submit">
+			<label>
+				<span>Name</span>
+				<!-- x-show="data.name.length > 0" -->
+				<input type="text" x-model="data.name"    />
+			</label>
+			<label>
+				<span>Email</span>
+				<!--x-show="data.email.length > 0" -->
+				<input type="email" x-model="data.email"   />
+			</label>
+			<label>
+				<label>
+				<span>Password</span>
+				<!-- x-show="data.password.length > 0" -->
+				<input type="password" x-model="data.password"   />
+			</label>
+			<label>
+				<label>
+				<span>Confirm Password</span>
+				<!-- x-show="data.password_confirm.length > 0" -->
+				<input type="password" x-model="data.password_confirm"   />
+			</label>
+			<label>
+				<span>Message</span>
+				<textarea
+					name="message"
+					x-model="data.message"
+					x-bind:class="data.message ? 'textarea' : ''"></textarea>
+			</label>
+			<button type="submit" x-text="buttonText" :disabled="loading">
+				Submit
+			</button>
+		</form>
+		<button><a href="/index.html">Go Home</a></button>
+      	<script src="./form.js"></script>
+</body>
+</html>

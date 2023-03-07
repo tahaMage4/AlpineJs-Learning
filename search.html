@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Search</title>
+		<script
+			src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"
+			defer></script>
+	</head>
+	<body>
+		<!-- Search Bar  -->
+		<div
+			x-data="{
+			search: '',
+			items: userData ,
+			get searchResults() {
+            return this.items.filter(
+                i => i.startsWith(this.search)
+            )
+			}
+        }"
+			x-effect="console.log(search)">
+			<input
+				type="text"
+				placeholder="Search......"
+				x-model="search"
+				@keyup.enter="li" />
+			<ul>
+				<template x-for="item in searchResults" :key="item.id">
+					<li x-text="item"></li>
+				</template>
+				<span x-text="item.age"></span>
+			</ul>
+		</div>
+
+		<!-- Alpine Example  -->
+		<div
+			x-data="{
+        search: '',
+
+        items: userData,
+
+        get filteredItems() {
+            return this.items.filter(
+                i => i.startsWith(this.search)
+            )
+        }
+    }"
+			x-effect="console.log(search)">
+			<input x-model="search" placeholder="Search..." />
+			<ul>
+				<template x-for="item in filteredItems" :key="item.id">
+					<div>
+						<li x-text="item"></li>
+					</div>
+				</template>
+			</ul>
+		</div>
+		<script src="/user.js"></script>
+	</body>
+</html>

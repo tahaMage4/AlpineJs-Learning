@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script
+			src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"
+			defer></script>
+	</head>
+	<body>
+		<style>
+			.bg-red {
+				background: red;
+			}
+			.bg-green {
+				background-color: green;
+			}
+			a {
+				text-decoration: none;
+				color: black;
+				cursor: pointer;
+			}
+			[x-cloak] {
+				display: none !important;
+			}
+		</style>
+		<!-- Simple Alter  -->
+		<button x-data @click="alert('taha Ahmed')">Click Me</button>
+		<!-- state is false  -->
+		<div x-data="{ open: false }">
+			<button @click="open=!open">Click</button>
+			<span x-text="open"></span>
+		</div>
+		<!-- Counter State  -->
+		<div x-data="{count : 0}" x-effect="console.log(count)">
+			<button @click="count++">Increment</button>
+			<span x-text="count"></span>
+			<button @click="count--">Decrement</button>
+		</div>
+
+		<!-- Drop Down  -->
+		<div x-data="{open: false}" x-cloak>
+			<button @click="open=!open">Toggle <span> > </span></button>
+			<div
+				x-show="open"
+				x-transition.duration.500ms
+				x-transition:leave.duration.1000ms
+				@click.outside="open=false">
+				taha
+			</div>
+			<div x-show="open" x-transition.opacity @click.outside="open = false">
+				ahmed
+			</div>
+			<div x-show="open" x-transition @click.outside="open = false">khan</div>
+		</div>
+
+		<!-- bind the attributes  -->
+		<button
+			x-data="{ color: false, data:'dddddd' }"
+			x-bind:class="color ? 'bg-red' : 'bg-green'"
+			@click="color=!color">
+			<div x-ignore>
+				<span x-text="data"></span>
+			</div>
+			Toggle Color
+		</button>
+
+		<!-- for loop  -->
+		<div
+			x-data="{items: [{name:'taha', age:20},{name:'saad', age:40},{name:'fhad', age:28}]}">
+			<ul>
+				<template x-for="item in items" :key="item.name">
+					<div>
+						<li x-text="item.age">
+							<button>txt</button>
+						</li>
+					</div>
+				</template>
+			</ul>
+		</div>
+
+		<!-- Go to form  -->
+		<button>
+			<a href="/form.html">Forms</a>
+		</button>
+
+		<button>
+			<a href="/search2.html">Search</a>
+		</button>
+
+		<button>
+			<a href="/table.html">table</a>
+		</button>
+
+		<!-- useRef -> alternativer of elementis & queryselector  -->
+		<button @click="$refs.text.remove()">Remove Text</button>
+		<span x-ref="text">Hello 👋</span>
+	</body>
+</html>
