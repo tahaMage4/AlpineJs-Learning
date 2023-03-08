@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" x-data>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Apline Store</title>
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet" />
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	<body>
+		<div x-data :class="$store.darkMode.on && 'bg-black text-white'">
+			<button x-data @click="$store.darkMode.toggle()">Dark Mode</button>
+			<div x-show="$store.darkMode.on" class="text-white">
+				<h1>Content</h1>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. At animi est
+					dolorum consectetur debitis possimus necessitatibus cum ea cupiditate
+					sequi?
+				</p>
+			</div>
+		</div>
+		<script>
+			document.addEventListener("alpine:init", () => {
+				Alpine.store("darkMode", {
+					on: false,
+
+					toggle() {
+						this.on = !this.on;
+					},
+				});
+			});
+		</script>
+	</body>
+</html>

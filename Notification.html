@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Notification</title>
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet" />
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	<body>
+		<div class="flex justify-center content-center w-1/2 h-1/2">
+			<div
+				x-data="{
+  visible: true,
+  timeout: 5000,
+  percent: 0,
+  interval: null,
+  close() {
+      this.visible = false;
+      clearInterval(this.interval)
+  },
+  init() {
+      setTimeout(() => {
+         this.visible = false;
+      }, this.timeout);
+
+      const startDate = Date.now();
+      const futureDate = Date.now() + this.timeout;
+      this.interval = setInterval(() => {
+          const date = Date.now();
+          this.percent = (date - startDate) * 100 / (futureDate - startDate);
+          if (this.percent >= 100) {
+              clearInterval(this.interval)
+          }
+      }, 30)
+  }
+}"
+				x-show="visible"
+				class="relative py-2 px-4 pb-4 bg-emerald-500 text-white bg-green-900 w-[200px] h-[150px] flex-wrap border-sky-400">
+				<button
+					@click="close"
+					class="absolute flex items-center justify-center right-0 top-0 w-[30px] h-[30px] rounded-full hover:bg-black/10 transition-colors">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+				<div class="font-semibold mb-2">Lorem ipsum dolor sit</div>
+				<div class="text-sm">
+					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ea
+					placeat sed soluta velit sint, adipisci consequuntur quaerat alias
+					consectetur iste perspiciatis ducimus consequatur vitae? Officia,
+					assumenda. Nobis, expedita optio.
+				</div>
+
+				<!-- Progress -->
+				<div>
+					<div
+						class="absolute left-0 bottom-0 right-0 h-[6px] bg-black/10"
+						:style="{'width': `${percent}%`}"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
