@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dispatch</title>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<!-- Alpine Plugins -->
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	<body>
+		<!-- dispatch  -->
+		<div
+			x-data="{input: 'ABC'}"
+			@notify="alert('Hello World!')"
+			@check="alert('taha ahmed')">
+			<button
+				x-model="input"
+				@click="$dispatch('notify'),$dispatch('check') , $dispatch('input', 'hey man!')">
+				Notify
+			</button>
+			<span x-text="input"></span>
+		</div>
+		<!-- root  -->
+		<div x-data data-message="Hello World!">
+			<button @click="alert($root.dataset.message)">Say Hi</button>
+		</div>
+
+		<!-- Next promises  -->
+		<div x-data="{ title: 'Hello' }">
+			<button
+				@click="
+            title = ' World!';
+            await $nextTick();
+            console.log($el.innerText);
+        "
+				x-text="title"></button>
+			<!-- unique id for any things  -->
+			<input type="text" :id="$id('text')" />
+		</div>
+
+		<!-- data  -->
+		<div x-data="{ greeting: 'Hello' }">
+			<div x-data="{ name: 'Caleb' }">
+				<!-- <div x-data="person">
+					<button @click="toggle" x-text="message">say hello</button>
+				</div> -->
+				<div x-data="{age: 20}">
+					<button x-text="sayHello({, name , age})"></button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Intersect Scroll to bottom  -->
+		<div x-data="{ shown: false }" x-intersect="shown = true">
+			<div x-show="shown" x-transition>I'm in the viewport!</div>
+		</div>
+
+		<script>
+			// document.addEventListener("alpine:init", () => {
+			// 	Alpine.data("person", () => ({
+			// 		age: 0,
+			// 		name: "fahad",
+			// 		message: "fahad is 0  years old",
+			// 		toggle() {
+			// 			this.age++;
+			// 			this.message = `fahad is ${this.age} years old !`;
+			// 		},
+			// 	}));
+			// });
+
+			function sayHello({ greeting, name, age }) {
+				return greeting + " " + name + age + "hhh" + "tttt" + "!";
+			}
+
+			// async function getLabel() {
+			// 	let response = await fetch("/api/label");
+
+			// 	return await response.text();
+			// }
+		</script>
+	</body>
+</html>
