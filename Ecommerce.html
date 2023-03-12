@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>E-Commerce</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+		<!-- core  -->
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	<body class="bg-slate-900">
+		<style>
+			[x-cloak] {
+				display: none !important;
+			}
+		</style>
+		<header class="flex justify-between">
+			<a href="./Ecommerce.html" class="text-decoration text-green-800"
+				><span>Home </span></a
+			>
+			<!-- Slide Bar  -->
+			<div
+				x-data="slideOut"
+				x-on:keydown.window.escape="slideOut"
+				class="flex gap-3">
+				<button @click="toggle" class="bg-teal-400 w-auto h-10">Cart</button>
+				<!-- Cart Items Counter -->
+				<!-- x-show="$store.header.cartItems"
+              x-text="$store.header.cartItems" -->
+				<small
+					x-data="cart"
+					x-transition
+					class="py-[2px] px-[8px] rounded-full bg-red-500 top-12"
+					x-text="cart"></small>
+				<!--/ Cart Items Counter -->
+
+				<div
+					x-cloak
+					x-show="slideOut"
+					x-transition.opacity
+					class="fixed inset-0 bg-slate-900/75"></div>
+
+				<!-- content  -->
+				<div
+					x-cloak
+					x-show="slideOut"
+					x-transition:enter="transition ease-out duration-300"
+					x-transition:enter-start="translate-x-full"
+					x-transition:enter-end="translate-x-0"
+					x-transition:leave="transition ease-in duration-300"
+					x-transition:leave-start="translate-x-0"
+					x-transition:leave-end="translate-x-full"
+					@click.away="slideOut = false"
+					class="fixed inset-y-0 right-0 z-50 w-screen max-w-lg bg-teal-400">
+					<button @click="toggle" class="bg-red-400 w-10 h-10">Close</button>
+				</div>
+			</div>
+			<!-- Slide Bar  End -->
+			<a href="./ProductPage.html" class="text-decoration text-green-800"
+				>Product Page</a
+			>
+		</header>
+
+		<div class="flex m-4 gap-4" x-data="cart">
+			<!-- Product Item -->
+			<div
+				class="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white">
+				<a href="/src/product.html" class="block overflow-hidden">
+					<img
+						src="https://randomuser.me/api/portraits/women/5.jpg"
+						alt=""
+						class="rounded-lg hover:scale-105 hover:rotate-1 transition-transform" />
+				</a>
+				<div class="p-4">
+					<h3 class="text-lg">
+						<a href="/src/product.html">
+							Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
+							Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
+						</a>
+					</h3>
+					<h5 class="font-bold">$17.99</h5>
+				</div>
+				<div class="flex justify-between py-3 px-4">
+					<button
+						class="w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-800 transition-colors">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+						</svg>
+					</button>
+					<button class="bg-green-400 p-2" @click="AddToCart">
+						Add to Cart
+					</button>
+				</div>
+			</div>
+			<!--/ Product Item -->
+			<!-- Product Item -->
+			<div
+				class="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white">
+				<a href="/src/product.html" class="block overflow-hidden">
+					<img
+						src="https://randomuser.me/api/portraits/women/5.jpg"
+						alt=""
+						class="rounded-lg hover:scale-105 hover:rotate-1 transition-transform" />
+				</a>
+				<div class="p-4">
+					<h3 class="text-lg">
+						<a href="#">
+							Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
+							Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
+						</a>
+					</h3>
+					<h5 class="font-bold">$17.99</h5>
+				</div>
+				<div class="flex justify-between py-3 px-4">
+					<button
+						class="w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-800 transition-colors">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+						</svg>
+					</button>
+					<button @click="AddToCart" class="bg-green-400 p-2">
+						Add to Cart
+					</button>
+				</div>
+			</div>
+			<!--/ Product Item -->
+		</div>
+
+		<!-- Notification  -->
+		<div
+			x-data="toast"
+			x-show="visible"
+			x-transition
+			x-cloak
+			@notify.window="show($event.detail.message)"
+			class="fixed w-[400px] left-1/2 -ml-[200px] top-16 py-2 px-4 pb-4 bg-emerald-500 text-white">
+			<!-- x-text="message" -->
+			<div class="font-semibold">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit aliquam
+				soluta quia cupiditate? Id, ad! Id officia eius qui non necessitatibus
+				modi at totam vero! Sed porro vitae quidem ratione.
+			</div>
+			<button
+				@click="close"
+				class="absolute flex items-center justify-center right-2 top-2 w-[30px] h-[30px] rounded-full hover:bg-black/10 transition-colors">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+			<!-- Progress -->
+			<div>
+				<div
+					class="absolute left-0 bottom-0 right-0 h-[6px] bg-black/10"
+					:style="{'width': `${percent}%`}"></div>
+			</div>
+		</div>
+
+		<script src="./AddToCart.js"></script>
+	</body>
+</html>

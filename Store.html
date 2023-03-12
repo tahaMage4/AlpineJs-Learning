@@ -10,11 +10,19 @@
 			rel="stylesheet" />
 		<script
 			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+		<script
+			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	</head>
 	<body>
 		<div x-data :class="$store.darkMode.on && 'bg-black text-white'">
-			<button x-data @click="$store.darkMode.toggle()">Dark Mode</button>
+			<button
+				x-data
+				@click="$store.darkMode.toggle()"
+				class="bg-red-400 w-auto h-8">
+				Dark Mode
+			</button>
 			<div x-show="$store.darkMode.on" class="text-white">
 				<h1>Content</h1>
 				<p>
@@ -27,7 +35,7 @@
 		<script>
 			document.addEventListener("alpine:init", () => {
 				Alpine.store("darkMode", {
-					on: false,
+					on: Alpine.$persist(true).as("darkMode_on"),
 
 					toggle() {
 						this.on = !this.on;

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Plugins</title>
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet" />
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+
+		<!-- core  -->
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	<body>
+		<!-- Mask plugin  {used in date piker & input } -->
+		<input x-mask="99/99/9999" placeholder="MM/DD/YYYY" />
+		<!-- Dynamic mask  -->
+		<input
+			x-mask:dynamic="
+    $input.startsWith('34') || $input.startsWith('37')
+        ? '9999 999999 99999' : '9999 9999 9999 9999'
+" />
+		<input x-mask:dynamic="$money($input)" />
+		<!-- dynamic money  -->
+		<input x-mask:dynamic="$money($input, ',')" />
+
+		<input x-mask:dynamic="$money($input, '.', ',', 4)" />
+		<!-- Mask plugin End  -->
+
+		<!-- Persist Plugin {Same as Redux store state global} -->
+		<!-- <div x-data="{ count: $persist(0) }" x-effect="console.log(count)">
+			<button @click="count++">Increment</button>
+			<span x-text="count"></span>
+			<button @click="count--">Decrement</button>
+		</div> -->
+
+		<!-- session storage  -->
+		<div x-data="{ count: $persist(0).using(sessionStorage) }">
+			<button @click="count++">Increment</button>
+			<span x-text="count"></span>
+			<button @click="count--">Decrement</button>
+		</div>
+
+		<!-- Focus Plugin {just used for tabs the modal & dropdown & tabs etc } -->
+
+		<!-- Collapse Plugin {used for dropdown with smoothy animation } -->
+		<div x-data="{ expanded: false }">
+			<button @click="expanded = ! expanded">Toggle Content</button>
+
+			<p x-show="expanded" x-collapse.duration.1000ms>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum eveniet
+				nobis minus quas dignissimos itaque non odit, vero, praesentium
+				doloribus cumque, assumenda consequuntur quia. Qui assumenda eaque
+				ratione cum mollitia?
+			</p>
+		</div>
+
+		<!-- Morph Plugin {Very Imp plugin major used for backend foarm submission}  -->
+
+		<div x-data="{ message: 'Change me, then press the button!' }">
+			<input type="text" x-model="message" class="border bg-red-400 w-full" />
+			<span x-text="message"></span>
+		</div>
+
+		<button>Run Morph</button>
+		<!-- Morph End   -->
+
+		<!-- Intersect Plugin {used in view port } -->
+		<div x-data="{ shown: false }" x-intersect="shown = true">
+			<button @click="shown=!shown">Intersect Plugin</button>
+			<div x-show="shown" x-transition-500s>I'm in the viewport!</div>
+		</div>
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+		<!-- Example for images {Also used in lazy image Loading} -->
+		<div x-data>
+			<div
+				x-data="{ datasrc: 'https://randomuser.me/api/portraits/men/1.jpg' , src: null }"
+				class="w-48 h-48 bg-red-400"
+				x-intersect.once.full="console.log(`shown the image - windo height is  ${window.innerHeight}` ); src=datasrc">
+				<h1>ddddd</h1>
+				<img :src="src" x-show="src" alt="ssss" x-transition />
+			</div>
+		</div>
+
+		<!-- Morph Script  -->
+		<script>
+			document.querySelector("button").addEventListener("click", () => {
+				let el = document.querySelector("div");
+
+				Alpine.morph(
+					el,
+					`
+            <div x-data="{ message: 'Change me, then press the button!' }">
+                <h2>See how new elements have been added</h2>
+
+                <input type="text" x-model="message">
+                <span x-text="message"></span>
+
+                <h2>but the state of this component hasn't changed? Magical.</h2>
+            </div>
+        `
+				);
+			});
+		</script>
+	</body>
+</html>
