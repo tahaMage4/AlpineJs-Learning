@@ -1,24 +1,24 @@
 document.addEventListener('alpine:init', () => {
-   Alpine.data('slideOut', () => ({
+   Alpine.data('index', () => ({
       slideOut: false,
-      cart: 10,
+      cart: 0,
+      watchlist: 0,
       toggle() {
          this.slideOut = !this.slideOut
       },
-      AddToCart() {
+      addToCart() {
          this.cart = this.cart++;
+         // this.toast.show('item addd');
+         console.log(this.cart++);
+      },
+      addToWatch() {
+         this.watchlist = this.watchlist++;
+         console.log(this.watchlist++);
+         // this.toast.show('item add to watchlist');
       }
    }))
 
-   Alpine.data('cart', () => ({
-      cart: 10,
-      AddToCart() {
-         this.cart = this.cart++;
-         // this.toast.show();
-         console.log(this.cart++);
-      }
-   }));
-
+   // Notification
    Alpine.data("toast", () => ({
       visible: false,
       delay: 5000,
