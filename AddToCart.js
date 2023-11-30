@@ -31,7 +31,7 @@ document.addEventListener('alpine:init', () => {
          clearInterval(this.interval);
       },
       show(message) {
-         this.visible = true;
+         this.visible = true; slideOut
          this.message = message;
 
          if (this.interval) {
